@@ -77,22 +77,46 @@ las señales requeridas.
 ### Nieto :boy:
 - En este programa serán redefinidos los manejadores ( handlers ) de
 las señales indicadas en la sección Señales soportadas.
-```C
-		
-		
-		
-```
 - El tratamiento de señales debe usar la función sigaction () . No usar
 la función signal ().
 ```C
-		
-		
+    int r;
+    struct sigaction act;
+    memset(&act, 0, sizeof(act));
+    act.sa_sigaction = &handler;
+    act.sa_flags = SA_SIGINFO;
+    sigaction(SIGHUP, &act, NULL); 
+    sigaction(SIGINT, &act, NULL); 
+    sigaction(SIGQUIT, &act, NULL); 
+    sigaction(SIGILL, &act, NULL); 
+    sigaction(SIGABRT, &act, NULL); 
+    sigaction(SIGFPE, &act, NULL); 
+    sigaction(SIGKILL, &act, NULL); 
+    sigaction(SIGSEGV, &act, NULL); 
+    sigaction(SIGPIPE, &act, NULL); 
+    sigaction(SIGALRM, &act, NULL); 
+    sigaction(SIGTERM, &act, NULL); 
+    sigaction(SIGCHLD, &act, NULL); 
+    sigaction(SIGSTOP, &act, NULL); 
+    sigaction(SIGTSTP, &act, NULL); 
+
+    pause();
+
+    while (1)
+        ;
+			
 		
 ```
 - Para cada señal recibida mostrar la siguiente información, obtenida
 de siginfo_t (cuando esté disponible)
 ```C
-		
+    if(siginfo){
+        printf("Signal number -> %d \n", siginfo->si_signo);
+        printf("Signal code -> %d\n", siginfo->si_code);
+        printf("Errno value -> %d\n", siginfo->si_errno);
+        printf("Sending process ID -> %d\n", siginfo->si_pid);
+    }
+    longjmp(env, 1234);		
 		
 		
 ```
