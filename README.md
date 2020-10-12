@@ -8,9 +8,9 @@ Linux.
 ### Padre :man:
 - Será responsable de crear un proceso hijo usando la llamada fork () .
 ```C
-		
-		
-		
+	pid_t pid;
+	// creamos hijo
+	pid = fork();	
 ```
 - Después de la creación de cada proceso hijo, por medio de la
 llamada exec ( execlp ) reemplazará el código del programa hijo, para
