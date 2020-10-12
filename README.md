@@ -16,16 +16,13 @@ Linux.
 llamada exec ( execlp ) reemplazará el código del programa hijo, para
 ejecutar el programa hijo.c
 ```C
-		
-		
-		
+        execlp("./hijo","hijo",(char *) 0);		
 ```
 - El programa deberá esperar a que termine la ejecución de los
 programas hijo.c y nieto.c . Usar waitpid ().
 ```C
-		
-		
-		
+       waitpid(pid, &stat, 0);
+				
 ```
 ### Hijo :adult:
 - El programa hijo.c creará un proceso hijo, por medio de la llamada
